@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Добавить контакт</title>
+
+    <style>
+    .div-valid
+    {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      width: 350px;
+      letter-spacing: 0.08em;
+      margin: 25px 0 0 0;
+
+      z-index: 3;
+
+      color: #D72A2A;
+    }
+    .div-valid:first-child{
+      margin-top: 0;
+    }
+    .page{
+      width: 50%;
+        margin: auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 25px;
+        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+      }
+      h1,h2,h3{
+        margin: 0;
+        padding: 0;
+      }
+      body{
+        margin: 0;
+        padding: 0;
+      }
+      p{
+        margin: 0;
+        padding: 0;
+      }
+      .header{
+        max-width: 1220px;
+        max-height: 80px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+        margin: 0 auto 40px;
+      }
+      .profiles{
+        display: flex;
+        flex-direction: column;
+        padding-left: 16px;
+        padding-top: 9px;
+        position: relative;
+      }
+      .header__profile{
+        display: flex;
+        flex-direction: row;
+        height: 80px;
+      }
+      .header__title{
+        font-family: "Montserrat Medium";
+        color: cadetblue;
+        font-weight: 200;
+        font-size: 32px;
+      }
+      .links{
+        font-family: "Montserrat Medium";
+        margin-top: 10px;
+        text-decoration: lightblue;
+        color: cadetblue;
+        transition: opacity .5s linear;
+        width: 150px;
+      }
+      .links:hover{
+        opacity: .2;
+        text-decoration: underline;
+      }
+      .other-link{
+        font-weight: 400;
+        font-size: 16px;
+      }
+      .other-link:first-child{
+        margin-right: 26px;
+      }
+      body
+        {
+          background-image: url("https://i.imgur.com/OE2qxfF.jpeg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        }
+        .button
+        {
+            padding: 7px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            background-color: #AFEEEE;
+        }
+        .form-control {
+        display: block;
+        width: 50%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.375rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      }
+    </style>
+</head>
+
+<body>
+<div th:insert="blocks/header"></div>
+<div class="page">
+    <form th:action="${'/contact/add'}" th:object="${contact}" method="post" style="width: 70%; margin: auto;">
+        <input type="hidden" th:field="*{user}" th:value="${contact.user}">
+
+        <span class="div-valid" th:if="${email_errors != null}" th:text="${email_errors}"></span>
+        <span class="div-valid" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        <div>
+            <label> Электронная почта: <input th:field="*{email}" th:value="${contact.email}" class="form-control"
+                                              type="text" name="title"
+                                              placeholder="Электронная почта"></label>
+        </div>
+        </br>
+        <span class="div-valid" th:if="${phoneNumber_errors != null}" th:text="${phoneNumber_errors}"></span>
+        <span class="div-valid" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+        <div>
+            <label> Мобильный номер: <input th:field="*{phoneNumber}" th:value="${contact.phoneNumber}"
+                                            class="form-control" type="number"
+                                            name="phoneNumberInput" placeholder="Мобильный номер"></label>
+        </div>
+        </br>
+        <button type="submit" class="button">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

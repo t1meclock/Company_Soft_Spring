@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Список пользователей</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <style>
+           .page{
+      width: 50%;
+        margin: auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 25px;
+        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+      }
+      h1,h2,h3{
+        margin: 0;
+        padding: 0;
+      }
+      body{
+        margin: 0;
+        padding: 0;
+      }
+      p{
+        margin: 0;
+        padding: 0;
+      }
+      .header{
+        max-width: 1220px;
+        max-height: 80px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+        margin: 0 auto 40px;
+      }
+      .profiles{
+        display: flex;
+        flex-direction: column;
+        padding-left: 16px;
+        padding-top: 9px;
+        position: relative;
+      }
+      .header__profile{
+        display: flex;
+        flex-direction: row;
+        height: 80px;
+      }
+      .header__title{
+        font-family: "Montserrat Medium";
+        color: cadetblue;
+        font-weight: 200;
+        font-size: 32px;
+      }
+      .links{
+        font-family: "Montserrat Medium";
+        margin-top: 10px;
+        text-decoration: lightblue;
+        color: cadetblue;
+        transition: opacity .5s linear;
+        width: 150px;
+      }
+      .links:hover{
+        opacity: .2;
+        text-decoration: underline;
+      }
+      .other-link{
+        font-weight: 400;
+        font-size: 16px;
+      }
+      .other-link:first-child{
+        margin-right: 26px;
+      }
+      body
+        {
+          background-image: url("https://i.imgur.com/OE2qxfF.jpeg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        }
+        .button
+        {
+            padding: 7px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            background-color: #AFEEEE;
+        }
+    </style>
+</head>
+
+<body>
+<div th:insert="blocks/header"></div>
+<div class="page">
+    <div style="width: 70%; margin: auto;">
+        <div th:each="user : ${userStaff}">
+            <div style="display: flex; flex-direction: row">
+                <label for="username" style="margin-right: 10px">Имя пользователя:</label>
+                <p id='username' th:text="${user.username}" style="margin: 0px"></p>
+            </div>
+            </br>
+            <div style="display: flex; flex-direction: row">
+                <label for="surname" style="margin-right: 10px">Фамилия:</label>
+                <p id='surname' th:text="${user.surname}" style="margin: 0px"></p>
+            </div>
+            </br>
+            <div style="display: flex; flex-direction: row">
+                <label for="name" style="margin-right: 10px">Имя:</label>
+                <p id='name' th:text="${user.name}" style="margin: 0px"></p>
+            </div>
+            </br>
+            <div style="display: flex; flex-direction: row">
+                <label for="patronymic" style="margin-right: 10px">Отчество:</label>
+                <p id='patronymic' th:text="${user.patronymic}" style="margin: 0px"></p>
+            </div>
+            </br>
+            <div style="display: flex; flex-direction: row">
+                <label for="dateOfBirth" style="margin-right: 10px">Дата рождения:</label>
+                <p id='dateOfBirth' th:text="${user.dateOfBirth}" style="margin: 0px"></p>
+            </div>
+            </br>
+            <div style="display: flex; flex-direction: row">
+                <label for="email" style="margin-right: 10px">Электронная почта:</label>
+                <p id='email' th:text="${user.contact != null} ? ${user.contact.email} : 'Не указано'"
+                   style="margin: 0px"></p>
+            </div>
+            </br>
+            <div style="display: flex; flex-direction: row">
+                <label for="phoneNumber" style="margin-right: 10px">Номер телефона:</label>
+                <p id='phoneNumber' th:text="${user.contact != null} ? ${user.contact.phoneNumber} : 'Не указано'"
+                   style="margin: 0px"></p>
+            </div>
+            </br>
+            <div th:each="staff : ${staffs}">
+                <div style="display: flex; flex-direction: row">
+                    <div th:if="${user.staffId == staff.id}">
+                        <div th:each="department : ${departments}">
+                            <label for="departmentName" th:if="${staff.departmentId == department.id}"
+                                   style="margin-right: 10px">Отдел:</label>
+                            <p id='departmentName' th:if="${staff.departmentId == department.id}"
+                               th:text="${department.departmentName}" style="margin: 0px"></p>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                <div style="display: flex; flex-direction: row">
+                    <div th:if="${user.staffId == staff.id}">
+                        <div th:each="post : ${posts}">
+                            <label for="staffId" th:if="${staff.postId == post.id}"
+                                   style="margin-right: 10px">Должность:</label>
+                            <p id='staffId' th:if="${staff.postId == post.id}" th:text="${post.postName}"
+                               style="margin: 0px"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <label for="roles" style="margin-right: 10px">Роли пользователя:</label>
+                <p id='roles' th:text="${user.roles}" style="margin: 0px"></p>
+            </div>
+            </br>
+            <p>=====================================</p>
+        </div>
+        <a th:href="'/admin/staffs/add'">Добавить сотрудника</a>
+    </div>
+</div>
+</body>
+</html>

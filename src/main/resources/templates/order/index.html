@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой заказ</title>
+
+    <style>
+        .page{
+      width: 50%;
+        margin: auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 25px;
+        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+      }
+      h1,h2,h3{
+        margin: 0;
+        padding: 0;
+      }
+      body{
+        margin: 0;
+        padding: 0;
+      }
+      p{
+        margin: 0;
+        padding: 0;
+      }
+      .header{
+        max-width: 1220px;
+        max-height: 80px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+        margin: 0 auto 40px;
+      }
+      .profiles{
+        display: flex;
+        flex-direction: column;
+        padding-left: 16px;
+        padding-top: 9px;
+        position: relative;
+      }
+      .header__profile{
+        display: flex;
+        flex-direction: row;
+        height: 80px;
+      }
+      .header__title{
+        font-family: "Montserrat Medium";
+        color: cadetblue;
+        font-weight: 200;
+        font-size: 32px;
+      }
+      .links{
+        font-family: "Montserrat Medium";
+        margin-top: 10px;
+        text-decoration: lightblue;
+        color: cadetblue;
+        transition: opacity .5s linear;
+        width: 150px;
+      }
+      .links:hover{
+        opacity: .2;
+        text-decoration: underline;
+      }
+      .other-link{
+        font-weight: 400;
+        font-size: 16px;
+      }
+      .other-link:first-child{
+        margin-right: 26px;
+      }
+      body
+        {
+          background-image: url("https://i.imgur.com/OE2qxfF.jpeg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        }
+.button
+        {
+            padding: 7px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            background-color: #AFEEEE;
+        }
+    </style>
+</head>
+
+<body>
+<div th:insert="blocks/header"></div>
+<div class="page" th:action="${'/order/index'}" th:object="${client}">
+    <div style="width: 70%; margin: auto;">
+        <div style="display: flex; flex-direction: row">
+            <label for="orgName" style="margin-right: 10px">Ваша организация:</label>
+            <p id='orgName' th:text="${client.orgName}" style="margin: 0px"></p>
+        </div>
+
+        <div style="display: flex; flex-direction: row">
+            <label for="orgAddress" style="margin-right: 10px">Адрес Вашей организации:</label>
+            <p id='orgAddress' th:text="${client.orgAddress}" style="margin: 0px"></p>
+        </div>
+
+        <div style="display: flex; flex-direction: row">
+            <label for="activeOrders" style="margin-right: 10px">Активные заказы:</label>
+            <p id='activeOrders' th:text="${client.order != null} ? 'Есть' : 'Отсутствуют'" style="margin: 0px"></p>
+        </div>
+        </br>
+        <a class="links main-link" th:href="${'/order/add/'} + ${client.id}" th:if="${client.order == null}"
+           sec:authorize="hasAuthority('CLIENT')">Разместить заказ</a>
+        <a class="links" th:href="${'/order/details/'} + ${client.id}" th:if="${client.order != null}"
+           sec:authorize="hasAuthority('CLIENT')">Информация о моём заказе</a>
+    </div>
+</div>
+</body>
+</html>

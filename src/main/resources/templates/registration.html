@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Регистрация</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+      .form-control {
+        display: block;
+        width: 50%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.375rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      }
+      .div-valid{
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      width: 350px;
+      letter-spacing: 0.08em;
+      margin: 25px 0 0 0;
+
+      z-index: 3;
+
+      color: #D72A2A;
+    }
+    .div-valid:first-child{
+      margin-top: 0;
+    }
+    .form-control {
+        display: block;
+        width: 50%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.375rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      }
+
+      body
+        {
+          background-image: url("https://i.imgur.com/OE2qxfF.jpeg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        }
+
+    .button
+        {
+            padding: 7px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            background-color: #AFEEEE;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div style="width: 38%; margin: auto; margin-top: 300px; background-color: white; border-radius: 25px; padding: 10px; box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);">
+    <div style="width: 70%; margin: auto;">
+        <div th:object="${user}">
+            <div th:if="${#messages}">
+                <p th:text="${message}"></p>
+            </div>
+
+            <h1>Регистрация нового пользователя</h1>
+            <form th:action="@{/registration}" method="post">
+                <span class="div-valid" th:if="${username_errors != null}" th:text="${username_errors}"></span>
+                <span class="div-valid" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                <div><label> Логин: <input th:field="*{username}" th:value="${user.username}" type="text"
+                                           class="form-control" name="username" placeholder="Логин"/></label></div>
+
+                <span class="div-valid" th:if="${password_errors != null}" th:text="${password_errors}"></span>
+                <span class="div-valid" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                <div><label> Пароль: <input th:field="*{password}" th:value="${user.password}" type="password"
+                                            class="form-control" name="password" placeholder="Пароль"/></label></div>
+
+                <span class="div-valid" th:if="${surname_errors != null}" th:text="${surname_errors}"></span>
+                <span class="div-valid" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+                <div><label> Фамилия: <input th:field="*{surname}" th:value="${user.surname}" type="text"
+                                             class="form-control" name="surname" placeholder="Фамилия"/></label></div>
+
+                <span class="div-valid" th:if="${name_errors != null}" th:text="${name_errors}"></span>
+                <span class="div-valid" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                <div><label> Имя: <input th:field="*{name}" th:value="${user.name}" type="text" class="form-control"
+                                         name="name" placeholder="Имя"/></label></div>
+
+                <span class="div-valid" th:if="${patronymic_errors != null}" th:text="${patronymic_errors}"></span>
+                <span class="div-valid" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}"></span>
+                <div><label> Отчество: <input th:field="*{patronymic}" th:value="${user.patronymic}" type="text"
+                                              class="form-control" name="patronymic" placeholder="Отчество"/></label>
+                </div>
+
+                <span class="div-valid" th:if="${dateOfBirth_errors != null}" th:text="${dateOfBirth_errors}"></span>
+                <span class="div-valid" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+                <div><label> Дата рождения: <input th:field="*{dateOfBirth}" th:value="${user.dateOfBirth}" type="date"
+                                                   class="form-control" name="dateOfBirth"/></label></div>
+
+                <div><input type="submit" style="padding: 7px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            background-color: #AFEEEE;" value="Зарегистрироваться"/></div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

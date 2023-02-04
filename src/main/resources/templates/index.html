@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Главная страница</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .page{
+        width: 75%;
+        margin: 0 auto;
+        padding-top: 28px;
+        }
+        h1,h2,h3{
+        margin: 0;
+        padding: 0;
+        }
+        body{
+        margin: 0;
+        padding: 0;
+        }
+        p{
+        margin: 0;
+        padding: 0;
+        }
+        .header{
+        max-width: 1220px;
+        max-height: 80px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+        margin: 0 auto 40px;
+        }
+        .posts{
+        font-family: "Montserrat Medium";
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        margin-right: 5px;
+        margin-top: 0px;
+        position: relative;
+        }
+        .header__title{
+        font-family: "Montserrat Medium";
+        color: cadetblue;
+        font-weight: 200;
+        font-size: 32px;
+        }
+        .links{
+        font-family: "Montserrat Medium";
+        margin-top: 10px;
+        text-decoration: lightblue;
+        color: cadetblue;
+        transition: opacity .5s linear;
+        width: 150px;
+        }
+        .links:hover{
+        opacity: .2;
+        text-decoration: underline;
+        }
+        .main-link{
+        font-weight: 400;
+        margin-left: 150px;
+        margin-bottom: -30px;
+        font-size: 16px;
+        line-height: 19px;
+        }
+        .other-link{
+        font-weight: 400;
+        margin-top: 5px;
+        font-size: 16px;
+        }
+        .other-link:first-child{
+        margin-right: 26px;
+        }
+        .content_box{
+        font-family: "Montserrat Light";
+        width: 840px;
+        height: 184px;
+        margin: 0 auto 16px;
+        background: #ced4da;
+        border-radius: 20px;
+        padding: 10px 34px 0;
+        }
+        .label__text{
+        margin-right: 10px;
+        }
+        .text_box{
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        margin-top: 10px;
+        }
+        .box-flex{
+        display: flex;
+        flex-direction: row;
+        }
+        .box-margin{
+        margin-bottom: 60px;
+        }
+        .link-more{
+        margin-top: 5px;
+        margin-left: 720px;
+        }
+
+        body
+        {
+          background-image: url("https://i.imgur.com/OE2qxfF.jpeg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+<div th:insert="blocks/header"></div>
+<form style="width: 50%; margin: auto; border-radius: 25px; background-color: white; box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);">
+    <div class="header__nav-links">
+        <a class="links other-link" style="font-size: 38px; margin: 15px;" href="/profile/details"
+           sec:authorize="hasAuthority('USER') or hasAuthority('CLIENT')">Профиль</a>
+    </div>
+    <div class="page">
+        <header class="header">
+            <h1 class="header__title" style="margin: auto;">ZHMA-Programmers Inc.</h1>
+        </header>
+
+        <main class="content">
+            <p>Реализуем как полный комплекс работ по разработке ПО, так и его отдельные виды.</p>
+            </br>
+            <p>Рабочие технологии: Microsoft.NET, Microsft SQL Server, ASP.NET, Java, J2EE, Swing, Oracle
+                Forms/Reports/SQL
+                and PL/SQL Windows Azure, JAVA, J2EE (включая SPRING/STRUT Frameworks), Open Systems LAMP Stack, XML,
+                XSLT,
+                Web, HTML, AJAX, SharePoint, BizTalk, TFS.</p>
+            </br>
+            <p>Разрабатываем прикладное ПО на технологиях Microsoft.NET и Java, web-приложения на ASP.NET и LAMP и
+                т.д.</p>
+            </br>
+            <p>Наши специалисты помогут вам:</p>
+            <ul>
+                <li>внести изменения в имеющиеся системы;</li>
+                <li>расширить круг выполняемых системой задач;</li>
+                <li>адаптировать их к современным условиям использования;</li>
+                <li>отказаться от устаревших или непопулярных технологических решений;</li>
+                <li>интегрировать системы;</li>
+                <li>повысить качество программных продуктов;</li>
+                <li>создать принципиально новые решения для бизнеса.</li>
+            </ul>
+            </br>
+            <p>Мы предоставляем следующие услуги:</p>
+            <p>Анализ требований: запрос предложения, спецификация программного обеспечения, функциональные и
+                нефункциональные требования, собранные и описанные на основе исходных данных, в соответствии со
+                стандартом
+                IEEE 830—1998;</p>
+            </br>
+            <p>Архитектура технического решения: высокоуровневое и низкоуровневое технические решения, отвечающие
+                требованиям, выявленным на предыдущем этапе;</p>
+            </br>
+            <p>Прототипирование: анализ и демонстрация применимости вариантов решения. Позволяет малыми усилиями
+                протестировать разные решения и выбрать наиболее приемлемое. Может использоваться как основа для
+                последующей
+                разработки.</p>
+            </br>
+            <p>Оценка трудозатрат: оптимистические, пессимистические оценки и связанные с выбранным техническим решением
+                риски.</p>
+            </br>
+            <p>Разработка: написание кода согласно техническому решению, создание юнит-тестов, исправление дефектов,
+                выявленных в ходе тестирования и приемки.</p>
+            </br>
+            <p>Развертывание: инсталляционные пакеты, скрипты и инструкции для синхронизации решения с тестовыми и
+                рабочими
+                платформами.</p>
+            </br>
+            <p>Поддержка: исправление дефектов, выявленных в процессе эксплуатации, внесение рабочих изменений в
+                систему.</p>
+            </br>
+            <p>Аудит технического решения: анализ соответствия нефункциональным требованиям, последовательности
+                применяемых
+                подходов, поиск путей оптимизации.</p>
+            </br>
+            <p>Документирование: создание и адаптация технической и сопроводительной документации.</p>
+            </br>
+            <p>Стоимость разработки программного обеспечения от 999 000 рублей.*</p>
+            </br>
+            </br>
+            <p>* Обращаем ваше внимание на то, что данный интернет-сайт, а также вся информация о товарах и ценах,
+                предоставленная на нём, носит исключительно информационный характер и ни при каких условиях не является
+                публичной офертой, определяемой положениями Статьи 437 Гражданского кодекса Российской Федерации. Для
+                получения подробной информации о наличии и стоимости указанных услуг, пожалуйста, обращайтесь напишите
+                нам
+                на почту aboba@zhma54.com или позвоните по телефону 8-800-555-35-35.</p>
+        </main>
+    </div>
+</form>
+</body>
+</html>
